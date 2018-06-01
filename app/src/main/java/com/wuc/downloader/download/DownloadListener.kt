@@ -20,6 +20,6 @@ interface DownloadListener {
     /**
      * 下载失败
      */
-    fun onFailure()
+    fun onFailure(e: Exception)
 
 }

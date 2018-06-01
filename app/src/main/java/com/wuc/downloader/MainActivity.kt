@@ -1,8 +1,14 @@
 package com.wuc.downloader
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
+import android.support.v7.app.AppCompatActivity
+import android.util.Log
+import android.widget.Toast
+import com.wuc.downloader.download.DownloadListener
+import com.wuc.downloader.download.Downloader
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
@@ -10,8 +16,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btn_download.setOnClickListener {
+        val url = "http://gdown.baidu.com/data/wisegame/011736e682948d44/yingyongbao_7212130.apk";
+        val desDir = File(Environment.getExternalStorageDirectory(), "downloader");
 
+        btn_download.setOnClickListener {
+            Downloader.downloadByUrlConnect(url, desDir, object : DownloadListener {
+                override fun onSuccess(file: File) {
+                    Toast.makeText(this@MainActivity, "下载成功", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onDownloading(total: Long, download: Long) {
+                    Log.d(this@MainActivity.javaClass.simpleName, "$download / $total")
+                }
+
+                override fun onFailure(e: Exception) {
+                    Toast.makeText(this@MainActivity, "下载失败", Toast.LENGTH_SHORT).show()
+                }
+            })
         }
     }
 }
