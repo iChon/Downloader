@@ -10,7 +10,7 @@ object Downloader {
     fun downloadByUrlConnect(url: String, desDir: File, l: DownloadListener) {
         val conn = URL(url).openConnection();
         conn.doInput = true;
-        conn.connectTimeout = 30 * 1000;
+//        conn.connectTimeout = 30 * 1000;
         val fileLength = conn.contentLength;
 
         if (!desDir.exists() || desDir.isFile) {

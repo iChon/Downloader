@@ -20,19 +20,34 @@ class MainActivity : AppCompatActivity() {
         val desDir = File(Environment.getExternalStorageDirectory(), "downloader");
 
         btn_download.setOnClickListener {
-            Downloader.downloadByUrlConnect(url, desDir, object : DownloadListener {
-                override fun onSuccess(file: File) {
-                    Toast.makeText(this@MainActivity, "下载成功", Toast.LENGTH_SHORT).show()
-                }
-
-                override fun onDownloading(total: Long, download: Long) {
-                    Log.d(this@MainActivity.javaClass.simpleName, "$download / $total")
-                }
-
-                override fun onFailure(e: Exception) {
-                    Toast.makeText(this@MainActivity, "下载失败", Toast.LENGTH_SHORT).show()
-                }
-            })
+            download(url, desDir);
         }
     }
+
+    private fun download(url: String, desDir: File) {
+        object : Thread(){
+            override fun run() {
+                Downloader.downloadByUrlConnect(url, desDir, object : DownloadListener {
+                    override fun onSuccess(file: File) {
+                        runOnUiThread {
+                            showToast("下载成功")
+                        }
+                    }
+
+                    override fun onDownloading(total: Long, download: Long) {
+                        Log.d(this@MainActivity.javaClass.simpleName, "$download / $total")
+                    }
+
+                    override fun onFailure(e: Exception) {
+                        showToast("下载失败")
+                    }
+                })
+            }
+        }.start()
+    }
+
+    private fun showToast(msg: String) {
+        Toast.makeText(this@MainActivity, msg, Toast.LENGTH_SHORT).show()
+    }
+
 }
