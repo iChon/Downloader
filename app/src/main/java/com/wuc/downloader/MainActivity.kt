@@ -27,18 +27,18 @@ class MainActivity : AppCompatActivity() {
     private fun download(url: String, desDir: File) {
         object : Thread(){
             override fun run() {
-                Downloader.downloadByUrlConnect(url, desDir, object : DownloadListener {
+                Downloader.downloadByOkHttp(url, desDir, object : DownloadListener {
                     override fun onSuccess(file: File) {
                         runOnUiThread {
                             showToast("下载成功")
                         }
                     }
 
-                    override fun onDownloading(total: Long, download: Long) {
+                    override fun onDownloading(total: Long?, download: Long?) {
                         Log.d(this@MainActivity.javaClass.simpleName, "$download / $total")
                     }
 
-                    override fun onFailure(e: Exception) {
+                    override fun onFailure(e: Exception?) {
                         showToast("下载失败")
                     }
                 })
