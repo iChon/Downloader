@@ -1,4 +1,4 @@
-package com.wuc.downloader.download.engin
+package com.wuc.download.engin
 
 import java.io.InputStream
 import java.net.URL

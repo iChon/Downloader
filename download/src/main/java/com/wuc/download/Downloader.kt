@@ -1,6 +1,6 @@
-package com.wuc.downloader.download
+package com.wuc.download
 
-import com.wuc.downloader.download.engin.IDownload
+import com.wuc.download.engin.IDownload
 import java.io.BufferedInputStream
 import java.io.File
 import java.io.FileOutputStream

@@ -1,4 +1,4 @@
-package com.wuc.downloader.download.engin
+package com.wuc.download.engin
 
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -10,7 +10,7 @@ import java.io.InputStream
  * @date 2018/6/4
  * @author wuc
  */
-class OkHttpProxy constructor(val url: String, okHttpClient: OkHttpClient) : IDownload {
+class OkHttpProxy constructor(val url: String, okHttpClient: OkHttpClient = OkHttpClient()) : IDownload {
 
     private val response: Response
 
@@ -18,8 +18,6 @@ class OkHttpProxy constructor(val url: String, okHttpClient: OkHttpClient) : IDo
         val request = Request.Builder().url(url).build()
         response = okHttpClient.newCall(request).execute()
     }
-
-    constructor(url: String) : this(url, OkHttpClient())
 
     override fun getDownloadUrl(): String {
         return url

@@ -1,4 +1,4 @@
-package com.wuc.downloader.download
+package com.wuc.download
 
 import java.io.File
 
