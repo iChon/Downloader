@@ -13,7 +13,7 @@ object Downloader {
         }
 
         val url = download.getDownloadUrl()
-        val fileName = url.substring(url.lastIndexOf(File.separatorChar) + 1)
+        val fileName = url.substring(url.lastIndexOf("/") + 1)
         val desFile = File(desDir, fileName)
 
         var bis: BufferedInputStream? = null

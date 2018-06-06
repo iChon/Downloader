@@ -10,18 +10,6 @@ dependencies {
 
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
-buildscript {
-    ext.kotlin_version = '1.2.30'
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-repositories {
-    mavenCentral()
-}
 compileKotlin {
     kotlinOptions {
         jvmTarget = "1.8"
@@ -35,11 +23,11 @@ compileTestKotlin {
 
 // https://blog.csdn.net/yin13753884368/article/details/79589368
 publish {
-    repoName = 'wuc'
-    userOrg = 'wuc'//bintray.com用户名
-    groupId = 'com.wuc'//jcenter上的路径
-    artifactId = 'downloader'//项目名称
-    publishVersion = '0.0.1'//版本号
+    repoName = 'wuc' // 仓库名,默认值maven
+    userOrg = 'wuc'// bintray.com的用户名
+    groupId = 'com.wuc'// 一个唯一值，默认包名,生成的gradle依赖前缀
+    artifactId = 'downloader'// 远程仓库包名称
+    publishVersion = '1.0.0'// 版本号
     desc = 'Oh hi, this is a nice description for a project, right?'
     website = 'https://github.com/iChon/Downloader'
 }

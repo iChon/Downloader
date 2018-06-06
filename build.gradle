@@ -20,6 +20,12 @@ allprojects {
     repositories {
         google()
         jcenter()
+//        jcenter {
+//            artifactUrls = ["https://wuc.bintray.com/wuc"]
+//        }
+        maven {
+            url "https://wuc.bintray.com/wuc"
+        }
     }
 }
 
