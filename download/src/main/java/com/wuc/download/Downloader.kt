@@ -7,7 +7,7 @@ import java.io.FileOutputStream
 
 object Downloader {
 
-    fun download(desDir: File, download: IDownload, l: DownloadListener) {
+    fun download(desDir: File, download: IDownload, l: DownloadListener?) {
         if (!desDir.exists() || desDir.isFile) {
             desDir.mkdirs()
         }
@@ -27,16 +27,16 @@ object Downloader {
             while (bytes >= 0) {
                 fos.write(buffer, 0, bytes)
                 bytesCopied += bytes
-                l.onDownloading(download.getTotalSize(), bytesCopied)
+                l?.onDownloading(download.getTotalSize(), bytesCopied)
                 bytes = bis.read(buffer)
             }
         } catch (e: Exception) {
-            l.onFailure(e)
+            l?.onFailure(e)
         } finally {
             fos?.close()
             bis?.close()
         }
-        l.onSuccess(desFile)
+        l?.onSuccess(desFile)
     }
 
 }
